@@ -3,9 +3,6 @@ print("Script starting...", flush=True)
 import argparse
 from pathlib import Path
 import shutil
-import cv2
-
-from brand_tracker import BrandTracker
 
 try:
     print("Importing YOLO...", flush=True)
@@ -30,10 +27,6 @@ def main():
     parser.add_argument('--same_dir', action='store_true', help='Save output video in the same directory as source')
     parser.add_argument('--show', action='store_true', help='Show results in a window')
     parser.add_argument('--nosave', action='store_true', help='Do not save output video/images')
-    parser.add_argument('--report', action='store_true', help='Generate PDF report after inference')
-    parser.add_argument('--lm_studio_url', type=str, default='http://26.198.160.131:1234/v1',
-                        help='LM Studio API URL')
-    parser.add_argument('--no_agent', action='store_true', help='Generate report without AI agent')
     args = parser.parse_args()
 
     weights = Path(args.weights)
@@ -48,17 +41,6 @@ def main():
 
     print(f"Loading model from {weights}...", flush=True)
     model = YOLO(weights.as_posix())
-
-    # Get video FPS for time calculations
-    cap = cv2.VideoCapture(source.as_posix())
-    video_fps = cap.get(cv2.CAP_PROP_FPS) or 30.0
-    cap.release()
-    print(f"Video FPS: {video_fps}", flush=True)
-
-    # Initialize BrandTracker with class names from the model
-    class_names = list(model.names.values()) if hasattr(model, 'names') else []
-    print(f"Tracking classes: {class_names}", flush=True)
-    tracker = BrandTracker(class_names=class_names, fps=video_fps)
 
     print(f"Starting inference on {source}...", flush=True)
     print("Using stream=True to handle large video files.", flush=True)
@@ -87,8 +69,6 @@ def main():
     frame_count = 0
     print("Processing frames...", flush=True)
     for r in results:
-        # Feed each frame's results to the BrandTracker
-        tracker.update(frame_count, r)
         frame_count += 1
         if save_dir is None and not args.nosave:
             save_dir = Path(r.save_dir)
@@ -98,45 +78,6 @@ def main():
             print(f"Processed {frame_count} frames...", end='\r', flush=True)
     
     print(f"\nInference completed. Total frames processed: {frame_count}", flush=True)
-
-    # Print tracking metrics summary
-    print("\n" + tracker.get_metrics_text(), flush=True)
-
-    # Generate PDF report if requested
-    if args.report:
-        try:
-            from report_generator import ReportGenerator
-            from agent import generate_analysis
-
-            metrics = tracker.get_metrics()
-            
-            ai_analysis = None
-            if not args.no_agent:
-                print("\nGenerating AI analysis...", flush=True)
-                try:
-                    ai_analysis = generate_analysis(
-                        metrics_text=tracker.get_metrics_text(),
-                        lm_studio_url=args.lm_studio_url
-                    )
-                    print("AI analysis generated successfully.", flush=True)
-                except Exception as e:
-                    print(f"Warning: AI analysis failed: {e}", flush=True)
-                    print("Generating report without AI analysis.", flush=True)
-
-            report_dir = Path(args.project) / 'reports'
-            report_dir.mkdir(parents=True, exist_ok=True)
-            output_pdf = report_dir / f"{source.stem}_report.pdf"
-
-            generator = ReportGenerator()
-            generator.generate(
-                metrics=metrics,
-                ai_analysis=ai_analysis,
-                video_name=source.name,
-                output_path=str(output_pdf)
-            )
-            print(f"\n📄 PDF Report saved to: {output_pdf}", flush=True)
-        except Exception as e:
-            print(f"Error generating report: {e}", flush=True)
 
     if not args.nosave and save_dir and args.same_dir and source.is_file():
         found_video = None
