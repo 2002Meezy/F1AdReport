@@ -1,0 +1,5 @@
+ultralytics
+langchain
+langchain-openai
+fpdf2
+opencv-python
