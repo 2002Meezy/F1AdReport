@@ -1,0 +1,19 @@
+train: C:/Users/luizr/CascadeProjects/Visual/datasets/f1_ads/train/images
+val: C:/Users/luizr/CascadeProjects/Visual/datasets/f1_ads/val/images
+names:
+  - 'AWS'
+  - 'American Express'
+  - 'Aramco'
+  - 'DHL'
+  - 'ETIHAD'
+  - 'Ferrari'
+  - 'Haas'
+  - 'Heineken'
+  - 'LV'
+  - 'Lenovo'
+  - 'Mercedes'
+  - 'Paramount+'
+  - 'Pirelli'
+  - 'Qatar Airways'
+  - 'Rolex'
+  - 'TAG Heuer'

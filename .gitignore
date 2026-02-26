@@ -1,0 +1,5 @@
+datasets/
+runs/
+*.pt
+Video teste/
+__pycache__/

@@ -1,0 +1,28 @@
+path: C:/Users/luizr/CascadeProjects/Visual/datasets/f1_ads_v2
+train: train/images
+val: val/images
+
+names:
+  0: AWS
+  1: American Express
+  2: Aramco
+  3: Cripto.com
+  4: DHL
+  5: ETIHAD
+  6: Ferrari
+  7: Globant
+  8: Haas
+  9: Heiniken
+  10: KitKat
+  11: LV
+  12: Lenovo
+  13: MSC cruises
+  14: Mercedes
+  15: Paramount+
+  16: Pirelli
+  17: Qatar Airways
+  18: Rolex
+  19: Salesforce
+  20: TAG Heuer
+  21: Vegas
+  22: santander
