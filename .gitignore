@@ -3,3 +3,5 @@ runs/
 *.pt
 Video teste/
 __pycache__/
+*.pdf
+output/
