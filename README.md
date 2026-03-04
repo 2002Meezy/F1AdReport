@@ -4,6 +4,10 @@ Sistema automatizado para detectar e analisar a visibilidade de patrocinadores e
 
 O sistema identifica logotipos de marcas em transmissões de F1, calcula métricas de visibilidade (tempo de exibição, frequência, confiança) e gera um **relatório PDF profissional** com gráficos e análise de IA.
 
+<p align="center">
+  <img src="assets/detection_preview.gif" alt="Detecção de marcas em tempo real" width="700"/>
+</p>
+
 ---
 
 ## 📋 O que o sistema faz
