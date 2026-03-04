@@ -55,14 +55,28 @@ Visual/
 
 ---
 
-## 📊 Conteúdo do PDF
+## 📊 Relatório PDF
 
-| Página | Conteúdo |
-|--------|----------|
-| 1 | Resumo do vídeo, tabela de marcas, Ranking Top 5 |
-| 2 | Gráfico de barras (tempo) + pizza (market share) |
-| 3 | Gráfico de confiança (verde/laranja/vermelho) |
-| 4 | Análise gerada por IA (se habilitada) |
+O sistema gera automaticamente um relatório PDF profissional com toda a análise de visibilidade das marcas no vídeo.
+
+<p align="center">
+  <img src="assets/report_preview.gif" alt="Preview do Relatório PDF" width="600"/>
+</p>
+
+### O que o relatório traz:
+
+📄 **Página 1 — Resumo e Dados**
+- **Cabeçalho** com nome do vídeo e data da análise
+- **Cards de resumo** com duração, FPS, total de frames e quantidade de marcas detectadas
+- **Tabela completa** com todas as marcas encontradas, ordenadas por tempo de exibição, mostrando: tempo visível (segundos), frames, total de detecções, porcentagem do vídeo e confiança média
+- **Ranking Top 5** — as 5 marcas mais visíveis com barras de progresso comparativas e estatísticas detalhadas
+
+📈 **Página 2 — Gráficos**
+- **Gráfico de barras** mostrando o tempo de exibição de cada marca em segundos, com gradiente de cores
+- **Gráfico de pizza (donut)** visualizando o market share de tempo de tela entre as marcas principais
+
+🤖 **Página 3 — Análise de IA** *(opcional)*
+- Análise escrita automaticamente por um modelo de linguagem (Qwen via LM Studio), com insights sobre a estratégia de posicionamento dos patrocinadores
 
 ---
 

@@ -484,19 +484,6 @@ class ReportGenerator:
         x_center = (210 - chart_w) / 2
         self.pdf.image(pie_chart, x=x_center, w=chart_w)
 
-        # --- Page 3: Confidence chart ---
-        self.pdf.add_page()
-
-        # Red accent bar
-        self.pdf.set_fill_color(*self.RED)
-        self.pdf.rect(0, 0, 210, 4, style="F")
-        self.pdf.ln(8)
-
-        self._section_title("Confidence Analysis")
-
-        conf_chart = self._generate_confidence_chart(metrics)
-        self.pdf.image(conf_chart, x=15, w=180)
-
     def _add_ai_analysis(self, ai_analysis: str):
         """Analise gerada pelo agente IA."""
         if not ai_analysis:

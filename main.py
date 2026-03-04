@@ -117,7 +117,7 @@ def process_video(model, source: Path, output_dir: Path, args, class_names: list
         for f in video_subdir.iterdir():
             if f.is_file() and f.suffix.lower() in VIDEO_EXTENSIONS:
                 dest = output_dir / f"{source.stem}_analyzed{f.suffix}"
-                f.rename(dest)
+                f.replace(dest)
                 print(f"  Video saved: {dest.name}", flush=True)
                 break
         # Clean up empty subfolder
